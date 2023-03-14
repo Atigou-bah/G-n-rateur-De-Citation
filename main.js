@@ -136,7 +136,11 @@ var quotes = [
     author : "Ted Nelson"
   },
 ]
-      document.body.style.backgroundImage = "url('img/img1.jpg')"
+      document.body.style.backgroundImage = "url('img/img4.jpg')"
+      document.body.style.backgroundSize = "cover"
+      document.body.style.backgroundRepeat = "no-repeat"
+      document.body.style.backgroundPosition = "cover"
+      document.body.style.backgroundColor ="black"
       const title = document.createElement("div")
       const btn = document.createElement("button")
       const btn2 = document.createElement("button")
@@ -207,4 +211,20 @@ function generateurDeCitation(){
   quote.innerHTML = quotes[index].quote;
   author.innerHTML = "-" + quotes[index].author
 }
+
+function share (){
+  if (navigator.share){
+    navigator.share({
+      title : 'Ma citation',
+      text : quote.innerHTML + " " + "Auteur :" + " " + author.innerHTML,
+      url : 'https://www.mon-site-web.com/citation',
+    })
+    .then(() => console.log ('Partage réussi !'))
+    .catch((error)=> console.log('erreur de partage', error)) 
+  }else{
+    alert('Le partage n\'est pas pris en charge sur ce navigateur.')
+  }
+}
+btn2.addEventListener("click", share);
+
 
